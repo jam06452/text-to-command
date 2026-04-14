@@ -76,6 +76,8 @@ body {
   position: relative;
   z-index: 1;
   gap: 4rem;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .header {
