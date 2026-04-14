@@ -22,6 +22,11 @@ end
 
 config :cli, CliWeb.Endpoint, http: [port: String.to_integer(System.get_env("PORT", "4000"))]
 
+# Configure OpenAI settings
+config :cli, :openai,
+  endpoint: System.get_env("OPENAI_ENDPOINT"),
+  key: System.get_env("OPENAI_KEY")
+
 if config_env() == :prod do
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
