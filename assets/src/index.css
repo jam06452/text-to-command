@@ -28,7 +28,6 @@ html,
 body,
 #root {
   width: 100%;
-  height: 100%;
 }
 
 html {
@@ -48,7 +47,7 @@ body {
 .app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   background: #000000;
   position: relative;
   overflow-y: auto;
@@ -68,24 +67,21 @@ body {
 }
 
 .content {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4rem 2rem;
+  padding: clamp(1.5rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
   position: relative;
   z-index: 1;
-  gap: 4rem;
-  overflow-y: auto;
-  overflow-x: hidden;
+  gap: clamp(2rem, 5vw, 4rem);
 }
 
 .header {
   text-align: center;
   max-width: 1000px;
   border-bottom: 3px solid #ffffff;
-  padding-bottom: 3rem;
+  padding-bottom: clamp(1.5rem, 4vw, 3rem);
 }
 
 .title {
@@ -121,9 +117,9 @@ body {
   max-width: 900px;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: clamp(1rem, 3vw, 2rem);
   border: 2px solid #ffffff;
-  padding: 3rem;
+  padding: clamp(1rem, 4vw, 3rem);
 }
 
 .input-group {
@@ -272,12 +268,12 @@ body {
   background: #000000;
   border: 2px solid #ffffff;
   border-radius: 0;
-  padding: 2rem;
+  padding: clamp(1rem, 3vw, 2rem);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: clamp(1rem, 2vw, 1.5rem);
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .output-section::before {
@@ -447,7 +443,7 @@ body {
 
 /* Footer */
 .footer {
-  padding: 2rem;
+  padding: clamp(1rem, 3vw, 2rem);
   text-align: center;
   color: #ffffff;
   font-size: 0.875rem;
@@ -456,6 +452,7 @@ body {
   font-family: 'Courier New', 'Monaco', monospace;
   font-weight: 700;
   letter-spacing: 0.05em;
+  flex-shrink: 0;
 }
 
 .footer a {
@@ -470,22 +467,28 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .app {
+    border: 2px solid #ffffff;
+  }
+
   .content {
-    padding: 2rem 1rem;
-    gap: 2.5rem;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
   }
 
   .title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    margin-bottom: clamp(1rem, 3vw, 2rem);
   }
 
   .subtitle {
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    line-height: 1.6;
   }
 
   .form-section {
-    padding: 2rem;
+    padding: clamp(1rem, 3vw, 2rem);
     max-width: 100%;
+    gap: clamp(1rem, 2vw, 1.5rem);
   }
 
   .input-wrapper {
@@ -496,6 +499,9 @@ body {
   .text-input {
     border-right: none;
     border-bottom: 2px solid #ffffff;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    min-height: 50px;
+    font-size: 0.95rem;
   }
 
   .select-input:last-child,
@@ -504,13 +510,15 @@ body {
   }
 
   .button-group {
-    gap: 0;
+    flex-direction: column;
   }
 
   .btn {
-    min-width: auto;
-    flex: 1;
+    border-right: none;
     border-bottom: 2px solid #ffffff;
+    min-height: 50px;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    font-size: 0.8rem;
   }
 
   .btn:last-child {
@@ -519,19 +527,75 @@ body {
 
   .output-section {
     max-width: 100%;
+    min-height: auto;
+    padding: clamp(1rem, 2vw, 2rem);
+    gap: clamp(0.75rem, 2vw, 1.5rem);
   }
 
   .command-display {
     flex-direction: column;
     align-items: stretch;
+    gap: clamp(1rem, 2vw, 2rem);
+    padding: clamp(1rem, 2vw, 1.5rem);
+    font-size: 0.9rem;
   }
 
   .copy-btn {
     align-self: flex-start;
+    padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
+    font-size: 0.7rem;
   }
 
   .header {
-    padding-bottom: 2rem;
+    max-width: 100%;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: clamp(1rem, 3vw, 2rem);
+  }
+
+  .footer {
+    border-top: 2px solid #ffffff;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    border: 2px solid #ffffff;
+  }
+
+  .content {
+    padding: clamp(1rem, 3vw, 1.5rem) clamp(0.75rem, 2vw, 1rem);
+    gap: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    margin-bottom: clamp(0.75rem, 2vw, 1rem);
+  }
+
+  .subtitle {
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
+    max-width: 100%;
+  }
+
+  .form-section {
+    padding: clamp(0.75rem, 2vw, 1rem);
+    border: 1px solid #ffffff;
+  }
+
+  .btn {
+    padding: clamp(0.75rem, 2vw, 1rem);
+    font-size: 0.7rem;
+    min-height: 45px;
+  }
+
+  .output-section {
+    border: 1px solid #ffffff;
+  }
+
+  .command-display {
+    word-break: break-word;
   }
 }
 
