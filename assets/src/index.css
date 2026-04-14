@@ -51,7 +51,8 @@ body {
   height: 100vh;
   background: #000000;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   border: 4px solid #ffffff;
 }
 
